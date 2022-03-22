@@ -3,7 +3,7 @@ import pandas as pd
 import math
 import random
 
-def cabidge(lmbd, eps, m, n, k, seed):
+def get_data(lmbd, eps, m, n, k, seed):
 
     def sigmoid(x):
         return 1 / (1 + math.exp(-x))
@@ -44,7 +44,7 @@ def cabidge(lmbd, eps, m, n, k, seed):
     for i in n_samples_per_center:
         np.random.seed(seed)
         W = np.random.normal(0, 1, (n_W, n_W))
-        idx = sample_idx(list(range(n)), n_W_res, idx_used, seed)
+        idx = sample_idx(list(range(n)), n_W_res, idx_used)
         
         k += 1
         for j in range(i):
