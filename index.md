@@ -34,10 +34,10 @@ Number of features or columns.
 **k**: _int_<br/>
 Number of clusters.
 
-**lmbd**: _float in range [0.5, 1.0]_<br/>
+**lmbd**: _float in range [0.0, 1.0]_<br/>
 Reference probability used in the transformation to the binary base of the database, after applying the sigmoid function.
 
-**eps**: _float in range [0.0, 0.5]_<br/>
+**eps**: _float in range [0.0, 1.0]_<br/>
 Interference used in the particularization of clusters, before the application of the sigmoid function and the transformation to the binary base.
 
 **random_state**: _int or None_<br/>
