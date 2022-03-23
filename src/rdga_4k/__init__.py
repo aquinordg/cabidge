@@ -1,9 +1,22 @@
-import numpy as np
-import math
-import random
+def catbird(m, n, k, lmbd=.5, eps=.5, random_state=None):
 
-def catbird(lmbd, eps, m, n, k):
-
+    # libraries
+    import numpy as np
+    import math
+    from numpy.random import RandomState
+    
+    # checking
+    assert type(m) == int and m > 1
+    
+    assert type(n) == int and n > 1
+    
+    assert type(k) == int and k > 1
+    
+    assert type(lmbd) == float and (lmbd >= 0.5 and lmbd <= 1.0)
+    
+    assert type(eps) == float and (eps >= 0.0 and eps <= 0.5)
+    
+    # tools
     def sigmoid(x):
         return 1 / (1 + math.exp(-x))
 
@@ -19,51 +32,51 @@ def catbird(lmbd, eps, m, n, k):
                 xbin.append(0)
         return xbin
 
-    def sample_idx(list_, n, ref):
-        idx = random.sample(list_, n)
-        idx.sort()
-        while idx in ref:
-            idx = random.sample(list_, n)
-            idx.sort()
-        return idx
-
-    n_W = int(n//2)+1
-    n_W_res = n - n_W
-
+    # initialization
+    s = int(n//2)+1
+    rem = n - s
+    
     n_samples_per_center = [int(m // k)] * k
-
     for i in range(m % k):
         n_samples_per_center[i] += 1
 
     X = []
     y = []
-    idx_used = []
-    k = -1
+    q = -1
 
-    for i in n_samples_per_center:
-        #np.random.seed(seed)
-        W = np.random.normal(0, 1, (n_W, n_W))
-        idx = sample_idx(list(range(n)), n_W_res, idx_used)
-        
-        k += 1
-        for j in range(i):
-            #np.random.seed(seed)
-            A = [np.random.normal(0, 1, n_W)]
+    for i in range(len(n_samples_per_center)):
+        if random_state == None:
+            W = RandomState().normal(0, 1, (s, s))
+            idx = list(RandomState().choice(list(range(n)), size=rem, replace=False))
+            idx.sort()
+            
+        elif type(random_state) == int:
+            W = RandomState(random_state*(i+1)).normal(0, 1, (s, s))
+            idx = list(RandomState(random_state*(i+1)).choice(list(range(n)), size=rem, replace=False))
+            idx.sort()
+            
+        else:
+            assert type(random_state) == RandomState
+            
+        q += 1
+        for j in range(n_samples_per_center[i]):
+            if random_state == None:
+                A = [RandomState().normal(0, 1, s)]
+            else:
+                A = [RandomState(random_state*(j+1)).normal(0, 1, s)]
+                
             A_W = [[sum(a*b for a,b in zip(A_row,W_col)) for W_col in zip(*W)] for A_row in A]
             A_W_sig = sig_f(A_W[0])
-            
+                    
             for l in idx:
                 A_W_sig.insert(l, eps)
             
             A_W_sig_bin = binarize(A_W_sig, lmbd)
             
-            y.append(k)
+            y.append(q)
             X.append(A_W_sig_bin)
-        
-        idx_used.append(idx)
-        
+                
     X = np.array(X, dtype=np.int64)
     y = np.array(y, dtype=np.int64)
     
     return X, y
-
