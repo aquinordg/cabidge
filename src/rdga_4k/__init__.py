@@ -1,9 +1,8 @@
 import numpy as np
-import pandas as pd
 import math
 import random
 
-def get_data(lmbd, eps, m, n, k, seed):
+def catbird(lmbd, eps, m, n, k):
 
     def sigmoid(x):
         return 1 / (1 + math.exp(-x))
@@ -42,13 +41,13 @@ def get_data(lmbd, eps, m, n, k, seed):
     k = -1
 
     for i in n_samples_per_center:
-        np.random.seed(seed)
+        #np.random.seed(seed)
         W = np.random.normal(0, 1, (n_W, n_W))
         idx = sample_idx(list(range(n)), n_W_res, idx_used)
         
         k += 1
         for j in range(i):
-            np.random.seed(seed)
+            #np.random.seed(seed)
             A = [np.random.normal(0, 1, n_W)]
             A_W = [[sum(a*b for a,b in zip(A_row,W_col)) for W_col in zip(*W)] for A_row in A]
             A_W_sig = sig_f(A_W[0])
