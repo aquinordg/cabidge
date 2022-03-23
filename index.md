@@ -55,7 +55,7 @@ Output database labels.
 
 ```markdown
 
-catbird(m = 5, n = 3, k = 2)
+catbird(m=5, n=3, k=2)
 
 ```
 _**Cluster 0**_
