@@ -43,10 +43,10 @@ Number of clusters.
 
 #### _Returns_
 
-**data**: array-like of shape (m, n)<br/>
+**data**: _array-like of shape (m, n)_<br/>
 Output database.
 
-**labels**: array-like of shape (1, m)<br/>
+**labels**: _array-like of shape (1, m)_<br/>
 Output database labels.
 
 ####  Example
