@@ -12,9 +12,9 @@ def catbird(m, n, k, lmbd=.5, eps=.5, random_state=None):
     
     assert type(k) == int and k > 1
     
-    assert type(lmbd) == float and (lmbd >= 0.5 and lmbd <= 1.0)
+    assert type(lmbd) == float and (lmbd >= 0.0 and lmbd <= 1.0)
     
-    assert type(eps) == float and (eps >= 0.0 and eps <= 0.5)
+    assert type(eps) == float and (eps >= 0.0 and eps <= 1.0)
     
     # tools
     def sigmoid(x):
