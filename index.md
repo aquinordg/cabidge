@@ -26,27 +26,27 @@ Given s = n//2 + 1, the construction of the databases, the process is divided in
 #### Parameters
 
 
-**lmbd**: _float_
+**lmbd**: _float_<br/>
 Reference probability used in the transformation to the binary base of the database, after applying the sigmoid function. We suggest using values belonging to the range [0.5, 1.0]. Default is 0.5.
 
-**eps**: _float_
+**eps**: _float_<br/>
 Interference used in the particularization of clusters, before the application of the sigmoid function and the transformation to the binary base. We suggest using values belonging to the range [0.0, 0.5]. Default is 0.5.
 
-**m**: _int_
+**m**: _int_<br/>
 Number of examples or rows.
 
-**n**: _int_
+**n**: _int_<br/>
 Number of features or columns.
 
-**k**: _int_
+**k**: _int_<br/>
 Number of clusters.
 
 #### _Returns_
 
-**data**: array-like of shape (m, n)
+**data**: array-like of shape (m, n)<br/>
 Output database.
 
-**labels**: array-like of shape (1, m)
+**labels**: array-like of shape (1, m)<br/>
 Output database labels.
 
 ####  Example
