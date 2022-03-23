@@ -9,7 +9,7 @@ The package generates synthetic data for applications in clustering algorithms.
 ### Categorical Binary Random Data
 ```markdown
 
-catbird(lmbd = 0.5, eps = 0.5, m, n, k)
+catbird(m, n, k, lmbd=0.5, eps=0.5, random_state=None)
 
 ```
 Generates random categorical binary data with _m_ examples (rows), _n_ attributes (columns), for _k_ clusters. The algorithm divides the number of examples into equal amounts within each of the clusters.
@@ -25,13 +25,6 @@ Given s = n//2 + 1, the construction of the databases, the process is divided in
 
 #### Parameters
 
-
-**lmbd**: _float_<br/>
-Reference probability used in the transformation to the binary base of the database, after applying the sigmoid function. We suggest using values belonging to the range [0.5, 1.0]. Default is 0.5.
-
-**eps**: _float_<br/>
-Interference used in the particularization of clusters, before the application of the sigmoid function and the transformation to the binary base. We suggest using values belonging to the range [0.0, 0.5]. Default is 0.5.
-
 **m**: _int_<br/>
 Number of examples or rows.
 
@@ -40,6 +33,15 @@ Number of features or columns.
 
 **k**: _int_<br/>
 Number of clusters.
+
+**lmbd**: _float in range [0.5, 1.0]_<br/>
+Reference probability used in the transformation to the binary base of the database, after applying the sigmoid function.
+
+**eps**: _float in range [0.0, 0.5]_<br/>
+Interference used in the particularization of clusters, before the application of the sigmoid function and the transformation to the binary base.
+
+**random_state**: _int or None_<br/>
+Random generator seed, useful for creating reproducible databases.
 
 #### _Returns_
 
@@ -53,7 +55,7 @@ Output database labels.
 
 ```markdown
 
-catbird(lmbd = 0.5, eps = 0.5, m = 5, n = 3, k = 2)
+catbird(m = 5, n = 3, k = 2)
 
 ```
 _**Cluster 0**_
