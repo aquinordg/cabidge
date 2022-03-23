@@ -60,32 +60,32 @@ catbird(lmbd = 0.5, eps = 0.5, m = 5, n = 3, k = 2)
 ```
 _**Cluster 0**_
 
-_Cluster matrix (W0):_ [[2.46 1.38], [0.34 1.02]]  
-_Example array * cluster matrix (A0 * W0):_ [0.16 1.65] * [[2.46 1.38], [0.34 1.02]] = [0.98, 1.92]  
-_A0 * W0 with eps after sigmoid function:_ [0.50, 0.72, 0.87]  
-_A0 * W0 after binarization:_ [0, 0, 0]  
+_Cluster matrix (W0):_ [[2.46 1.38], [0.34 1.02]]<br/>
+_Example array * cluster matrix (A0 * W0):_ [0.16 1.65] * [[2.46 1.38], [0.34 1.02]] = [0.98, 1.92]<br/>
+_A0 * W0 with eps after sigmoid function:_ [0.50, 0.72, 0.87]<br/>
+_A0 * W0 after binarization:_ [0, 0, 0]<br/>
 
-_Cluster matrix (W0):_ [[2.46 1.38], [0.34 1.02]]  
-_Example array * cluster matrix (A1 * W0):_ [ 0.66 -0.22] * [[2.46 1.38], [0.34 1.02]] = [1.56, 0.68]  
-_A1 * W0 with eps after sigmoid function:_ [0.5, 0.82, 0.66]  
-_A1 * W0 after binarization:_ [0, 0, 0]  
+_Cluster matrix (W0):_ [[2.46 1.38], [0.34 1.02]]<br/>
+_Example array * cluster matrix (A1 * W0):_ [ 0.66 -0.22] * [[2.46 1.38], [0.34 1.02]] = [1.56, 0.68]<br/>
+_A1 * W0 with eps after sigmoid function:_ [0.5, 0.82, 0.66]<br/>
+_A1 * W0 after binarization:_ [0, 0, 0]<br/>
 
-_Cluster matrix (W0):_ [[2.46 1.38], [0.34 1.02]]  
-_Example array * cluster matrix (A2 * W0):_ [-1.12 -0.63] * [[2.46 1.38], [0.34 1.02]] = [-3.00, -2.21]  
-_A2 * W0 with eps after sigmoid function:_ [0.5, 0.04, 0.09]  
-_A2 * W0 after binarization:_ [0, 1, 1]  
+_Cluster matrix (W0):_ [[2.46 1.38], [0.34 1.02]]<br/>
+_Example array * cluster matrix (A2 * W0):_ [-1.12 -0.63] * [[2.46 1.38], [0.34 1.02]] = [-3.00, -2.21]<br/>
+_A2 * W0 with eps after sigmoid function:_ [0.5, 0.04, 0.09]<br/>
+_A2 * W0 after binarization:_ [0, 1, 1]<br/>
 
 _**Cluster 1**_
 
-_Cluster matrix (W1):_ [[0.31 -1.22], [-0.22  1.33]]  
-_Example array * cluster matrix (A4 * W1):_ [0.02 1.98] * [[0.31 -1.22], [-0.22  1.33]] = [-0.43, 2.62]  
-_A3 * W1 with eps after sigmoid function:_ [0.39, 0.93, 0.5]  
+_Cluster matrix (W1):_ [[0.31 -1.22], [-0.22  1.33]]<br/>
+_Example array * cluster matrix (A4 * W1):_ [0.02 1.98] * [[0.31 -1.22], [-0.22  1.33]] = [-0.43, 2.62]<br/>
+_A3 * W1 with eps after sigmoid function:_ [0.39, 0.93, 0.5]<br/>
 _A3 * W1 after binarization:_ [1, 0, 0]  
 
-_Cluster matrix (W0):_ [[2.46 1.38], [0.34 1.02]]  
-_Example array * cluster matrix (A4 * W1):_ [ 1.44  -0.28] * [[0.31 -1.22], [-0.22  1.33]] = [0.51, -2.15]  
-_A4 * W1 with eps after sigmoid function:_ [0.62, 0.10, 0.5]  
-_A4 * W1 after binarization:_ [0, 1, 0]  
+_Cluster matrix (W1):_ [[2.46 1.38], [0.34 1.02]]<br/>
+_Example array * cluster matrix (A4 * W1):_ [ 1.44  -0.28] * [[0.31 -1.22], [-0.22  1.33]] = [0.51, -2.15]<br/>
+_A4 * W1 with eps after sigmoid function:_ [0.62, 0.10, 0.5]<br/>
+_A4 * W1 after binarization:_ [0, 1, 0]<br/>
 
 **data:** [[0, 0, 0], [0, 0, 0], [0, 1, 1], [1, 0, 0], [0, 1, 0]]
 
