@@ -60,10 +60,10 @@ catbird(lmbd = 0.5, eps = 0.5, m = 5, n = 3, k = 2)
 ```
 _**Cluster 0**_
 
-_Cluster matrix (W0):_ [[2.46 1.38], [0.34 1.02]]
-_Example array * cluster matrix (A0 * W0):_ [0.16 1.65] * [[2.46 1.38], [0.34 1.02]] = [0.98, 1.92]
-_A0 * W0 with eps after sigmoid function:_ [0.50, 0.72, 0.87]
-_A0 * W0 after binarization:_ [0, 0, 0]
+_Cluster matrix (W0):_ [[2.46 1.38], [0.34 1.02]]  
+_Example array * cluster matrix (A0 * W0):_ [0.16 1.65] * [[2.46 1.38], [0.34 1.02]] = [0.98, 1.92]  
+_A0 * W0 with eps after sigmoid function:_ [0.50, 0.72, 0.87]  
+_A0 * W0 after binarization:_ [0, 0, 0]  
 
 _Cluster matrix (W0):_ [[2.46 1.38], [0.34 1.02]]
 _Example array * cluster matrix (A1 * W0):_ [ 0.66 -0.22] * [[2.46 1.38], [0.34 1.02]] = [1.56, 0.68]
