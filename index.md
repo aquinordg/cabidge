@@ -18,7 +18,7 @@ Generates random categorical binary data with _m_ examples (rows), _n_ attribute
 
 Given s = n//2 + 1, the construction of the databases, the process is divided into three phases:
 
-- We filled in _s_ features, obtained from the multiplication of a single matrix, for each cluster, and a array, for each example. Both the matrix and the array are obtained from gaussian distributions.
+- We filled in _s_ features, obtained from the multiplication of a single probability matrix, for each cluster, and a array, for each example. Both the matrix and the array values are obtained from gaussian distributions.
 
 - The remaining _n - s_ features are filled using the _eps_ interference value. Examples within each cluster receive interference in the same positions, uniquely.
 
