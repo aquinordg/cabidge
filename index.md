@@ -1,6 +1,6 @@
 # Package rdga_4k
 
-Python package [rdga_4k](https://aquinordg.github.io/rdga_4k/): Random Data Generator Algorithm for Clustering.
+Python package [rdga_4k](https://github.com/aquinordg/rdga_4k): Random Data Generator Algorithm for Clustering.
 
 The package generates synthetic data for applications in clustering algorithms.
 
@@ -90,3 +90,9 @@ _A4 * W1 after binarization:_ [0, 1, 0]<br/>
 **data:** [[0, 0, 0], [0, 0, 0], [0, 1, 1], [1, 0, 0], [0, 1, 0]]
 
 **labels:** [0 0 0 1 1]
+
+####  Install
+
+```markdown
+pip install git+https://github.com/aquinordg/rdga_4k.git
+```
