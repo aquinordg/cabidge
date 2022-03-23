@@ -14,15 +14,15 @@ Questions and information contact us: aquinordga@gmail.com
 catbird(lmbd = 0.5, eps = 0.5, m, n, k)
 
 ```
-Generates random categorical binary data with _m_ examples (rows), _n_ attributes (columns), for _k_ groups. The algorithm divides the number of examples into equal amounts within each of the groups.
+Generates random categorical binary data with _m_ examples (rows), _n_ attributes (columns), for _k_ clusters. The algorithm divides the number of examples into equal amounts within each of the clusters.
 
 Given s = n//2 + 1, the construction of the databases, the process is divided into three phases:
 
-- We filled in _s_ features, obtained from the multiplication of a single matrix, for each cluster, and a array, for each example. Both the matrix and the vector are obtained from gaussian distributions.
+- We filled in _s_ features, obtained from the multiplication of a single matrix, for each cluster, and a array, for each example. Both the matrix and the array are obtained from gaussian distributions.
 
-- The remaining _n - s_ features are filled using the eps interference value. Examples within each cluster receive interference in the same positions, uniquely.
+- The remaining _n - s_ features are filled using the _eps_ interference value. Examples within each cluster receive interference in the same positions, uniquely.
 
-- In this way, we apply a sigmoid function to the database and convert it to the binary base, given the probability lmbd. Where we associate 1 to values smaller than the parameter.
+- In this way, we apply a sigmoid function to the database and convert it to the binary base, given the probability _lmbd_. Where we associate 1 to values smaller than the parameter.
 
 
 #### Parameters
@@ -35,7 +35,7 @@ Reference probability used in the transformation to the binary base of the datab
 Interference used in the particularization of clusters, before the application of the sigmoid function and the transformation to the binary base. We suggest using values belonging to the range [0.0, 0.5]. Default is 0.5.
 
 **m**: _int_
-Number of examples or lines.
+Number of examples or rows.
 
 **n**: _int_
 Number of features or columns.
@@ -49,7 +49,7 @@ Number of clusters.
 Output database.
 
 **labels**: array-like of shape (1, m)
-Database labels.
+Output database labels.
 
 ####  Example
 
@@ -78,7 +78,7 @@ _A2 * W0 after binarization:_ [0, 1, 1]<br/>
 _**Cluster 1**_
 
 _Cluster matrix (W1):_ [[0.31 -1.22], [-0.22  1.33]]<br/>
-_Example array * cluster matrix (A4 * W1):_ [0.02 1.98] * [[0.31 -1.22], [-0.22  1.33]] = [-0.43, 2.62]<br/>
+_Example array * cluster matrix (A3 * W1):_ [0.02 1.98] * [[0.31 -1.22], [-0.22  1.33]] = [-0.43, 2.62]<br/>
 _A3 * W1 with eps after sigmoid function:_ [0.39, 0.93, 0.5]<br/>
 _A3 * W1 after binarization:_ [1, 0, 0]  
 
