@@ -4,8 +4,6 @@ Python package [rdga_4k](https://github.com/aquinordg/rdga_4k): Random Data Gene
 
 The package generates synthetic data for applications in clustering algorithms.
 
-Questions and information contact us: aquinordga@gmail.com
-
 ## Functions
 
 ### Categorical Binary Random Data
@@ -91,8 +89,12 @@ _A4 * W1 after binarization:_ [0, 1, 0]<br/>
 
 **labels:** [0 0 0 1 1]
 
-####  Install
+#### Install
 
 ```markdown
 pip install git+https://github.com/aquinordg/rdga_4k.git
 ```
+
+#### Contact us
+
+E-mail: aquinordga@gmail.com
