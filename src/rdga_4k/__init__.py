@@ -74,6 +74,7 @@ def catbird(m, n, k, lmbd=.5, eps=.5, random_state=None):
     y = np.array(y, dtype=np.int64)
 
     return X, y
+<<<<<<< HEAD
     
 def free_catbird(n, rate, feat_sig, lmbd=.5, eps=.5, random_state=None):
 
@@ -168,4 +169,3 @@ def free_catbird(n, rate, feat_sig, lmbd=.5, eps=.5, random_state=None):
 #    y = np.array(y, dtype=np.int64)
 #    
 #    return X, y
-    

@@ -74,6 +74,7 @@ def catbird(m, n, k, lmbd=.5, eps=.5, random_state=None):
     y = np.array(y, dtype=np.int64)
 
     return X, y
+<<<<<<< HEAD
     
 def free_catbird(n, rate, feat_sig, lmbd=.5, eps=.5, random_state=None):
 
@@ -160,7 +161,7 @@ def free_catbird(n, rate, feat_sig, lmbd=.5, eps=.5, random_state=None):
 #            
 #            A_W_sig_bin = np.array([random_state.binomial(1, eps) for i in range(n)])
 #            A_W_sig_bin[idx] = binarize(A_W_sig, lmbd)
-
+#
 #            y.append(q)
 #            X.append(A_W_sig_bin)
 #
@@ -169,3 +170,5 @@ def free_catbird(n, rate, feat_sig, lmbd=.5, eps=.5, random_state=None):
 #    
 #    return X, y
     
+=======
+>>>>>>> parent of 576cb36 (free_catbird created)
