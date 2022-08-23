@@ -202,7 +202,7 @@ def new_free_catbird(n, rate, feat_sig, lmbd=.5, eps=.5, random_state=None):
             A_W = [[sum(a*b for a,b in zip(A_row,W_col)) for W_col in zip(*W)] for A_row in A]            
             A_W_sig = sig_f(A_W[0])
             
-            A_W_sig_bin = np.array([random_state.binomial(1, eps) for i in range(n)])
+            A_W_sig_bin = random_state.binomial(1, eps, n)
             A_W_sig_bin[idx] = binarize(A_W_sig, lmbd)
 
             y.append(q)
