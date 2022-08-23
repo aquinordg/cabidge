@@ -192,7 +192,7 @@ def new_free_catbird(n, rate, feat_sig, lmbd=.5, eps=.5, random_state=None):
     y = []
     q = -1
 
-        for i in range(len(rate)):
+    for i in range(len(rate)):
         W = random_state.normal(0, 1, (feat_sig[i], feat_sig[i]))
         idx = list(random_state.choice(list(range(n)), size=feat_sig[i], replace=False))
         
