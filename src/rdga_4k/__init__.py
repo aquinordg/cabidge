@@ -1,4 +1,4 @@
-  def catbird(n, rate, feat_sig, lmbd=.8, eps=.2, random_state=None):
+def catbird(n, rate, feat_sig, lmbd=.8, eps=.2, random_state=None):
 
     # libraries
     import numpy as np
