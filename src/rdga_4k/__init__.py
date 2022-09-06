@@ -115,7 +115,10 @@ def catbird2(n, rate, feat_sig, lmbd=.8, eps=.2, random_state=None):
             A_W_cum_dist = scipy.stats.erlang.cdf(E, feat_sig[i])
             A_W_sig_bin = random_state.binomial(1, eps, n)
         
-        A_W_sig_bin[idx] = binarize(A_W_cum_dist, lmbd)
+            A_W_sig_bin[idx] = binarize(A_W_cum_dist, lmbd)
+            
+            y.append(q)
+            X.append(A_W_sig_bin)
 
     X = np.array(X, dtype=np.int64)
     y = np.array(y, dtype=np.int64)
