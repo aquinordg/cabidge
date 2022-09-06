@@ -2,8 +2,9 @@ def catbird(n, rate, feat_sig, lmbd=.8, eps=.2, random_state=None):
 
     # libraries
     import numpy as np
-    import scipy
     import math
+    import scipy
+    from scipy import stats
     from numpy.random import RandomState
 
     if random_state is None:
@@ -65,8 +66,9 @@ def catbird2(n, rate, feat_sig, lmbd=.8, eps=.2, random_state=None):
 
     # libraries
     import numpy as np
-    import scipy
     import math
+    import scipy
+    from scipy import stats
     from numpy.random import RandomState
 
     if random_state is None:
