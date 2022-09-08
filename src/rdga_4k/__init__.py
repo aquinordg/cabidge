@@ -152,6 +152,7 @@ def new_free_catbird(n, rate, feat_sig, lmbd=.5, eps=.5, random_state=None):
     import numpy as np
     import math
     from numpy.random import RandomState
+    from scipy.stats import norm
 
     if random_state is None:
         random_state = RandomState()
@@ -171,6 +172,9 @@ def new_free_catbird(n, rate, feat_sig, lmbd=.5, eps=.5, random_state=None):
 
     assert type(eps) == float and (eps >= 0.0 and eps <= 1.0)
 
+    # tools
+    discretize = np.vectorize(lambda x, thr: 1 if x < thr else 0)
+
     # initialization
     X = []
     y = []
@@ -184,12 +188,10 @@ def new_free_catbird(n, rate, feat_sig, lmbd=.5, eps=.5, random_state=None):
         for j in range(rate[i]):
             A = random_state.normal(0, 1, (1, feat_sig[i]))
             A_W = A @ W
-            A_W_norm = A_W / math.sqrt(feat_sig[i])
+            A_W_norm = norm.cdf(A_W / math.sqrt(feat_sig[i]))
 
-            result = random_state.normal(0, 1, (n, n))
-            result[:, idx] = A_W_norm
-
-            result = np.digitize(result, bins=[-3, -2, -1, 0, 1, 2, 3])
+            result = random_state.binomial(1, eps, n)
+            result[idx] = discretize(A_W_norm, lmbd)
 
             y.append(q)
             X.append(result)
