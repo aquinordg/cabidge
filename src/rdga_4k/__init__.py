@@ -200,3 +200,21 @@ def new_free_catbird(n, rate, feat_sig, lmbd=.5, eps=.5, random_state=None):
     y = np.array(y, dtype=np.int64)
 
     return X, y
+
+
+def reduce_nominal(X, n):
+    """
+    Parameters:
+    `X`: output X from the catbird function
+    `n`: number of resulting nominal features
+    """
+
+    assert X.shape[1] % n == 0
+
+    shift = X.shape[1] // n
+    Xnew = np.zeros(shape=(X.shape[0], n))
+
+    for i in range(n):
+        Xnew[:, i] = X[:, i*shift:(i*shift + shift)].sum(axis=1)
+
+    return Xnew
