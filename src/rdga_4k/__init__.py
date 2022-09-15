@@ -1,10 +1,9 @@
-def catbird(n, rate, feat_sig, lmbd=.8, eps=.2, random_state=None):
+import numpy as np
+import math
+from numpy.random import RandomState
+from scipy.stats import norm
 
-    # libraries
-    import numpy as np
-    import math
-    from numpy.random import RandomState
-    from scipy.stats import norm
+def catbird(n, rate, feat_sig, lmbd=.8, eps=.2, random_state=None):
 
     if random_state is None:
         random_state = RandomState()
