@@ -4,6 +4,29 @@ import math
 from numpy.random import RandomState
 from scipy.stats import norm
 
+def get_rate(N, k, n_min):
+    """
+    Parameters:
+    `N` int > 1: approximate number of examples
+    `k` int > 1: number of clusters
+    `n_min` int: minimum number of examples per cluster
+    """
+    
+    assert type(N) == int and N > 1
+    assert type(k) == int and k > 1
+    
+    rate_c = []
+    resto = N
+    for j in range(2, k+2):
+        rate_c.append(int(resto/j))
+        resto = N - sum(rate_c)
+    rate_s = [int(sum(rate_c)/k) for i in range(k)]
+    rate=[rate_s, rate_c]
+    
+    assert (min(rate_s) and min(rate_c)) >= n_min
+    
+    return(rate)
+
 def catbird(n_feat, feat_sig, rate, lmbd=.8, eps=.2, random_state=None):
     """
     Parameters:
