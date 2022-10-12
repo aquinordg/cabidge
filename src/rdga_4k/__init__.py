@@ -66,7 +66,7 @@ def catbird(n_feat, feat_sig, rate, lmbd=.8, eps=.2, random_state=None):
 
     for i in range(len(rate)):
         W = random_state.normal(0, 1, (feat_sig[i], feat_sig[i]))
-        idx = random_state.choice(n, size=feat_sig[i], replace=False)
+        idx = random_state.choice(n_feat, size=feat_sig[i], replace=False)
 
         q += 1
         for j in range(rate[i]):
