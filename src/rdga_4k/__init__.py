@@ -4,6 +4,8 @@ import math
 from numpy.random import RandomState
 from scipy.stats import norm
 
+from sklearn.metrics.cluster import adjusted_rand_score
+
 def consensus_score(list_arr_labels):
     """
     Parameters:
