@@ -4,6 +4,19 @@ import math
 from numpy.random import RandomState
 from scipy.stats import norm
 
+def consensus_score(list_arr_labels):
+    """
+    Parameters:
+    `list_arr_labels`: list of labels arrays
+    """
+
+    scr = []
+    for i in range(len(list_arr_labels)):
+        for j in range(i+1, len(list_arr_labels)):
+            scr.append(adjusted_rand_score(list_arr_labels[i], list_arr_labels[j]))
+    return sum(scr)
+    
+    
 def get_rate(N, k, n_min):
     """
     Parameters:
