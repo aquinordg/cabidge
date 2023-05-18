@@ -73,3 +73,19 @@ $$x_{ij} = \begin{cases}
     \end{cases}$$
 
 Remark: note that the product $XY$ of random variables $X, Y \sim \mathcal{N}(0, 1)$ is not a standard normal distribution. However, it is similar enough to use $\Phi$ to satisfy the first equation.
+
+[$\epsilon = 0.1$; $\lambda = 0.9$]{#fig:g2 .image .placeholder
+original-image-src="fig/e0.1_l0.9" original-image-title="fig:"
+width="1\\linewidth"}
+
+[$\epsilon = 0.1$; $\lambda = 0.8$]{#fig:g1 .image .placeholder
+original-image-src="fig/e0.1_l0.8" original-image-title="fig:"
+width="1\\linewidth"}
+
+[$\epsilon = 0.2$; $\lambda = 0.9$]{#fig:g4 .image .placeholder
+original-image-src="fig/e0.2_l0.9" original-image-title="fig:"
+width="1\\linewidth"}
+
+[$\epsilon = 0.2$; $\lambda = 0.8$]{#fig:g3 .image .placeholder
+original-image-src="fig/e0.2_l0.8" original-image-title="fig:"
+width="1\\linewidth"}
