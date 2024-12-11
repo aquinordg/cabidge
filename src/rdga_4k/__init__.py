@@ -4,38 +4,30 @@ import math
 from numpy.random import RandomState
 from scipy.stats import norm    
     
-def get_rate(N, k, n_min):
-    """
-    Parameters:
-    `N` int > 1: approximate number of examples
-    `k` int > 1: number of clusters
-    `n_min` int: minimum number of examples per cluster
-    """
-    
-    assert type(N) == int and N > 1
-    assert type(k) == int and k > 1
-    
-    rate_c = []
-    resto = N
-    for j in range(2, k+2):
-        rate_c.append(int(resto/j))
-        resto = N - sum(rate_c)
-    rate_s = [int(sum(rate_c)/k) for i in range(k)]
-    rate=[rate_s, rate_c]
-    
-    assert (min(rate_s) and min(rate_c)) >= n_min
-    
-    return(rate)
-
 def catbird(n_feat, feat_sig, rate, lmbd=.8, eps=.2, random_state=None):
     """
+    Generates a labeled dataset with categorical features based on feature clustering.
+
     Parameters:
-    `n_feat` int > 1: number of features
-    `feat_sig` list: number of significant features (no noise), equal to the size of the rate list 
-    `rate` list: division of examples into clusters, equal to the size of the feat_sig list
-    `lmbd` float 0,1: intersection factor between features
-    `eps` float 0,1: feature noise rate
-    `random_state` int: random seed
+        n_feat (int): Number of total features. Must be greater than 1.
+        feat_sig (list[int]): List of the number of significant features per cluster. 
+            The length must match the size of the `rate` list.
+        rate (list[int]): List indicating the number of examples per cluster. 
+            Each element corresponds to a cluster.
+        lmbd (float, optional): Intersection factor between features. 
+            Values must be in the range [0, 1]. Default is 0.8.
+        eps (float, optional): Noise rate for feature generation. 
+            Values must be in the range [0, 1]. Default is 0.2.
+        random_state (int or RandomState, optional): Seed or RandomState instance for 
+            reproducibility. Default is None.
+
+    Returns:
+        tuple: 
+            - X (np.ndarray): Binary matrix of shape (n_samples, n_feat) representing the features.
+            - y (np.ndarray): Array of shape (n_samples,) containing cluster labels for each example.
+
+    Example:
+        >>> X, y = catbird(n_feat=10, feat_sig=[3, 2], rate=[50, 50], lmbd=0.7, eps=0.1, random_state=42)
     """
 
     if random_state is None:
@@ -87,13 +79,26 @@ def catbird(n_feat, feat_sig, rate, lmbd=.8, eps=.2, random_state=None):
     
 def canard(n_feat, n_cat, rate, lmbd=10, eps=.3, random_state=None):
     """
+    Generates a labeled dataset with categorical features divided into multiple categories.
+
     Parameters:
-    `n_feat` int > 1: number of features
-    `n_cat` int > 1: number of categories
-    `rate` list: division of examples into clusters
-    `lmbd` int >= 1: intersection factor between features
-    `eps` float 0,1: feature noise rate
-    `random_state` int: random seed
+        n_feat (int): Number of total features. Must be greater than 1.
+        n_cat (int): Number of categories for each feature. Must be greater than 1.
+        rate (list[int]): List indicating the number of examples per cluster.
+        lmbd (int, optional): Intersection factor between features. 
+            Must be greater than or equal to 1. Default is 10.
+        eps (float, optional): Noise rate for feature generation. 
+            Values must be in the range [0, 1]. Default is 0.3.
+        random_state (int or RandomState, optional): Seed or RandomState instance for 
+            reproducibility. Default is None.
+
+    Returns:
+        tuple: 
+            - X (np.ndarray): Matrix of shape (n_samples, n_feat) representing categorical features.
+            - y (np.ndarray): Array of shape (n_samples,) containing cluster labels for each example.
+
+    Example:
+        >>> X, y = canard(n_feat=10, n_cat=3, rate=[50, 50], lmbd=5, eps=0.2, random_state=42)
     """
     
     if random_state is None:
@@ -140,3 +145,28 @@ def canard(n_feat, n_cat, rate, lmbd=10, eps=.3, random_state=None):
     y = np.array(y, dtype=np.int64)
             
     return X, y
+    
+### Other tools
+
+def get_rate(N, k, n_min):
+    """
+    Parameters:
+    `N` int > 1: approximate number of examples
+    `k` int > 1: number of clusters
+    `n_min` int: minimum number of examples per cluster
+    """
+    
+    assert type(N) == int and N > 1
+    assert type(k) == int and k > 1
+    
+    rate_c = []
+    resto = N
+    for j in range(2, k+2):
+        rate_c.append(int(resto/j))
+        resto = N - sum(rate_c)
+    rate_s = [int(sum(rate_c)/k) for i in range(k)]
+    rate=[rate_s, rate_c]
+    
+    assert (min(rate_s) and min(rate_c)) >= n_min
+    
+    return(rate)

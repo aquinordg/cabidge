@@ -1,91 +1,143 @@
-# Random Data Generator Algorithm for Clustering (rdga_4k)
+![Project](https://img.shields.io/badge/Project-rdga_4k-blue)
+![Author](https://img.shields.io/badge/Author-aquinordg-green)
+![Python](https://img.shields.io/badge/Python-3.13-blue)
+![Version](https://img.shields.io/badge/Version-1.0-orange)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-The package generates synthetic data for applications in clustering algorithms.
+# rdga_4k (Random Data Generator Algorithm for Clustering)
 
-## Functions
-### Categorical Binary Random Data
+The rdga_4k library generates synthetic datasets tailored for clustering algorithm applications. It provides two core functions, `catbird` and `canard`, for customizable dataset generation with support for binary and categorical features.
 
-```sh
-catbird(n_feat, feat_sig, rate, lmbd=.8, eps=.2, random_state=None)
+---
+
+## 🔥 Features
+
+- **Synthetic Data for Clustering:** Tailored datasets for clustering algorithm research and testing.
+- **Flexible Configurations:** Supports binary and categorical feature generation.
+- **Noise and Intersection Control:** Fine-tune feature noise and cluster intersections.
+- **Reproducible Results:** Ensure consistency with random seed support.
+
+---
+
+## 🛠 Installation
+
+Install using *git* and *pip install*:
+
+```bash
+pip install git+https://github.com/aquinordg/rdga_4k.git
+
 ```
-#### Parameters:
-`n_feat` int > 1: number of features;
 
-`feat_sig` list: number of significant features (no noise), equal to the size of the rate list;
+---
 
-`rate` list: division of examples into clusters, equal to the size of the feat_sig list;
+## 🚀 Usage
 
-`lmbd` float 0,1: intersection factor between features;
+Import the library and use the `catbird` or `canard` functions to generate datasets:
 
-`eps` float 0,1: feature noise rate;
+```python
+from rdga_4k import catbird, canard
 
-`random_state` int: random seed.
+# Example using catbird
+X, y = catbird(
+    n_feat=10,
+    feat_sig=[3, 2],
+    rate=[50, 50],
+    lmbd=0.7,
+    eps=0.1,
+    random_state=42
+)
 
-#### Explanation:
+# Example using canard
+X, y = canard(
+    n_feat=10,
+    n_cat=3,
+    rate=[50, 50],
+    lmbd=5,
+    eps=0.2,
+    random_state=42
+)
+```
 
-Consider the following scenario. Each data sample represents a person. Each feature indicates whether such a person has a certain skill. We assume that people can be grouped in clusters such that:
+---
 
-- the presence/absence of a certain few features (called *dependent features*) are correlated; and
+## 📜 Functions Overview
 
-- other features may be present/absent independently.
+### `catbird`
 
-Dependent features vary among clusters. The rationale is that, for a particular group of people, some features are more important than others. These important features appear more frequent than other features in the group. Moreover, they are positively or negatively correlated. For example, IT professionals usually share common skills: programming, data base skills, etc. On the other hand, the presence of some pairs of skills should be rare. For example, IT professionals who program rarely use the same programming language or development environment.
+Generates a labeled dataset with binary features based on feature clustering.
 
-Thus, let $x_{ij}$ be the indicator whether the $i$-th person, belonging to cluster $c(i)$, has the $j$-th feature. We want to generate a dataset such that
+#### Parameters
 
-$$P(x_{ij} = 1) \approx \begin{cases}
-        \lambda & \text{ if } j \in \mathcal{F}_{c(i)} \\
-        \epsilon & \text{ otherwise,}
-    \end{cases}$$
+- `n_feat` (int): Number of total features. Must be greater than 1.
+- `feat_sig` (list[int]): List of the number of significant features per cluster.
+- `rate` (list[int]): Number of examples per cluster.
+- `lmbd` (float): Intersection factor between features. Default is `0.8`.
+- `eps` (float): Noise rate for feature generation. Default is `0.2`.
+- `random_state` (int or RandomState, optional): Seed for reproducibility.
 
-where $0 < \epsilon < \lambda < 1$ and $\mathcal{F}_{c(i)}$ is the set of dependents features of the cluster $c(i)$.
+#### Returns
+- `X` (np.ndarray): Binary matrix representing the features.
+- `y` (np.ndarray): Array of cluster labels.
 
-We also want that the following statements to hold:
+#### Example
 
-$$P(x_{ij}, x_{ij'}) = P(x_{ij})P(x_{ij'}) \forall j \not\in \mathcal{F}_{c(i)}\text{,}$$
+```python
+X, y = catbird(n_feat=10, feat_sig=[3, 2], rate=[50, 50], lmbd=0.7, eps=0.1, random_state=42)
+```
 
-$$P(x_{ij}) = P(x_{i'j}) \text{ if } c(i) = c(i')\text{, and }$$
+---
 
-$$P(x_{ij}, x_{ij'}) \neq P(x_{ij})P(x_{ij'}) \forall j, j' \in \mathcal{F}_{c(i)}\text{.}$$
+### `canard`
 
-To generate data with such properties, each cluster $c$ in the dataset is associated with an $m$ by $m$ matrix $W^c$ whose elements are
+Generates a labeled dataset with categorical features divided into multiple categories.
 
-$$w^c_{pq} \sim \mathcal{N}(0, 1)\text{,}$$
+#### Parameters
 
-and each sample $\vec{x}_{i} = (x_{i1}, x_{i2}, \dots, x_{im})$ such that $c(i) = c$ is associated with a vector $m$-dimensional $\vec{a}^i$ whose elements are
+- `n_feat` (int): Number of total features. Must be greater than 1.
+- `n_cat` (int): Number of categories for each feature. Must be greater than 1.
+- `rate` (list[int]): Number of examples per cluster.
+- `lmbd` (int): Intersection factor between features. Default is `10`.
+- `eps` (float): Noise rate for feature generation. Default is `0.3`.
+- `random_state` (int or RandomState, optional): Seed for reproducibility.
 
-$$a_p^i \sim \mathcal{N}(0, 1)\text{.}$$
+#### Returns
+- `X` (np.ndarray): Matrix of categorical features.
+- `y` (np.ndarray): Array of cluster labels.
 
-Then, let
+#### Example
 
-$$\vec{b}^i = \frac{1}{\sqrt{m}} W^{c(i)} \times \vec{a}^i\text{,}$$
+```python
+X, y = canard(n_feat=10, n_cat=3, rate=[50, 50], lmbd=5, eps=0.2, random_state=42)
+```
 
-then, we generate the dependent features ($j \in \mathcal{F}^{c(i)}$)
+---
 
-$$x_{ij} = \begin{cases}
-        1 & \text{ if } \Phi\!\left(b^i_j\right) < \lambda \\
-        0 & \text{ otherwise,}
-    \end{cases}$$ where the $\Phi$ is the cumulative distribution function of the standard normal distribution. The other features,
-$j \not\in \mathcal{F}^{c(i)}$, are generated using
-$$x_{ij} = \begin{cases}
-        1 & \text{ if } u_{ij} \sim \mathcal{U}(0, 1) < \epsilon \\
-        0 & \text{ otherwise,}
-    \end{cases}$$
+## 📄 License
 
-Remark: note that the product $XY$ of random variables $X, Y \sim \mathcal{N}(0, 1)$ is not a standard normal distribution. However, it is similar enough to use $\Phi$ to satisfy the first equation.
+This project is licensed under the MIT License.
 
-[$\epsilon = 0.1$; $\lambda = 0.9$]{#fig:g2 .image .placeholder
-original-image-src="fig/e0.1_l0.9" original-image-title="fig:"
-width="1\\linewidth"}
+---
 
-[$\epsilon = 0.1$; $\lambda = 0.8$]{#fig:g1 .image .placeholder
-original-image-src="fig/e0.1_l0.8" original-image-title="fig:"
-width="1\\linewidth"}
+## 🤝 Contributing
 
-[$\epsilon = 0.2$; $\lambda = 0.9$]{#fig:g4 .image .placeholder
-original-image-src="fig/e0.2_l0.9" original-image-title="fig:"
-width="1\\linewidth"}
+Contributions are welcome! To contribute:
 
-[$\epsilon = 0.2$; $\lambda = 0.8$]{#fig:g3 .image .placeholder
-original-image-src="fig/e0.2_l0.8" original-image-title="fig:"
-width="1\\linewidth"}
+1. Fork the repository.
+2. Create a new branch.
+3. Commit your changes.
+4. Push to the branch.
+5. Open a pull request.
+
+For questions or information, feel free to reach out at: [aquinordga@gmail.com](mailto:aquinordga@gmail.com).
+
+---
+
+## 👨‍💻 Author
+
+Developed by AQUINO, R. D. G. (https://github.com/aquinordg).
+
+---
+
+## 💬 Feedback
+
+Feel free to open an issue or contact me for feedback or feature requests. Your input is highly appreciated!
