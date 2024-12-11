@@ -134,7 +134,10 @@ For questions or information, feel free to reach out at: [aquinordga@gmail.com](
 
 ## 👨‍💻 Author
 
-Developed by AQUINO, R. D. G. (https://github.com/aquinordg).
+AQUINO, R. D. G.
+[![Lattes](https://raw.githubusercontent.com/aquinordg/assets/main/icons/lattes-icon.png)](http://lattes.cnpq.br/2373005809061037)
+[![ORCID](https://raw.githubusercontent.com/aquinordg/assets/main/icons/orcid-icon.png)](https://orcid.org/0000-0002-8486-8354)
+[![Google Scholar](https://raw.githubusercontent.com/aquinordg/assets/main/icons/google-scholar-icon.png)](https://scholar.google.com/citations?user=r5WsvKgAAAAJ&hl)
 
 ---
 
