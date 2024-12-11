@@ -1,102 +1,146 @@
-# Package rdga_4k
+![Project](https://img.shields.io/badge/Project-rdga_4k-blue)
+![Author](https://img.shields.io/badge/Author-aquinordg-green)
+![Python](https://img.shields.io/badge/Python-3.13-blue)
+![Version](https://img.shields.io/badge/Version-1.0-orange)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-Python package [rdga_4k](https://github.com/aquinordg/rdga_4k): Random Data Generator Algorithm for Clustering.
+# rdga_4k (Random Data Generator Algorithm for Clustering)
 
-The package generates synthetic data for applications in clustering algorithms.
+The rdga_4k library generates synthetic datasets tailored for clustering algorithm applications. It provides two core functions, `catbird` and `canard`, for customizable dataset generation with support for binary and categorical features.
 
-## Functions
+---
 
-### Categorical Binary Random Data
-```markdown
+## 🔥 Features
 
-catbird(m, n, k, lmbd=0.5, eps=0.5, random_state=None)
+- **Synthetic Data for Clustering:** Tailored datasets for clustering algorithm research and testing.
+- **Flexible Configurations:** Supports binary and categorical feature generation.
+- **Noise and Intersection Control:** Fine-tune feature noise and cluster intersections.
+- **Reproducible Results:** Ensure consistency with random seed support.
+
+---
+
+## 🛠 Installation
+
+Install using *git* and *pip install*:
+
+```bash
+pip install git+https://github.com/aquinordg/rdga_4k.git
 
 ```
-Generates random categorical binary data with _m_ examples (rows), _n_ attributes (columns), for _k_ clusters. The algorithm divides the number of examples into equal amounts within each of the clusters.
 
-Given s = n//2 + 1, the construction of the databases, the process is divided into three phases:
+---
 
-- We filled in _s_ features, obtained from the multiplication of a single probability matrix, for each cluster, and a array, for each example. Both the matrix and the array values are obtained from gaussian distributions.
+## 🚀 Usage
 
-- The remaining _n - s_ features are filled using the _eps_ interference value. Examples within each cluster receive interference in the same positions, uniquely.
+Import the library and use the `catbird` or `canard` functions to generate datasets:
 
-- In this way, we apply a sigmoid function to the database and convert it to the binary base, given the probability _lmbd_. Where we associate 1 to values smaller than the parameter.
+```python
+from rdga_4k import catbird, canard
 
+# Example using catbird
+X, y = catbird(
+    n_feat=10,
+    feat_sig=[3, 2],
+    rate=[50, 50],
+    lmbd=0.7,
+    eps=0.1,
+    random_state=42
+)
+
+# Example using canard
+X, y = canard(
+    n_feat=10,
+    n_cat=3,
+    rate=[50, 50],
+    lmbd=5,
+    eps=0.2,
+    random_state=42
+)
+```
+
+---
+
+## 📜 Functions Overview
+
+### `catbird`
+
+Generates a labeled dataset with binary features based on feature clustering.
 
 #### Parameters
 
-**m**: _int_<br/>
-Number of examples or rows.
+- `n_feat` (int): Number of total features. Must be greater than 1.
+- `feat_sig` (list[int]): List of the number of significant features per cluster.
+- `rate` (list[int]): Number of examples per cluster.
+- `lmbd` (float): Intersection factor between features. Default is `0.8`.
+- `eps` (float): Noise rate for feature generation. Default is `0.2`.
+- `random_state` (int or RandomState, optional): Seed for reproducibility.
 
-**n**: _int_<br/>
-Number of features or columns.
+#### Returns
+- `X` (np.ndarray): Binary matrix representing the features.
+- `y` (np.ndarray): Array of cluster labels.
 
-**k**: _int_<br/>
-Number of clusters.
+#### Example
 
-**lmbd**: _float in range [0.0, 1.0]_<br/>
-Reference probability used in the transformation to the binary base of the database, after applying the sigmoid function.
-
-**eps**: _float in range [0.0, 1.0]_<br/>
-Interference used in the particularization of clusters, before the application of the sigmoid function and the transformation to the binary base.
-
-**random_state**: _int or None_<br/>
-Random generator seed, useful for creating reproducible databases.
-
-#### _Returns_
-
-**data**: _array-like of shape (m, n)_<br/>
-Output database.
-
-**labels**: _array-like of shape (1, m)_<br/>
-Output database labels.
-
-####  Example
-
-```markdown
-
-catbird(m=5, n=3, k=2)
-
-```
-_**Cluster 0**_
-
-_Cluster matrix (W0):_ [[2.46 1.38], [0.34 1.02]]<br/>
-_Example array * cluster matrix (A0 * W0):_ [0.16 1.65] * [[2.46 1.38], [0.34 1.02]] = [0.98, 1.92]<br/>
-_A0 * W0 with eps after sigmoid function:_ [0.50, 0.72, 0.87]<br/>
-_A0 * W0 after binarization:_ [0, 0, 0]<br/>
-
-_Cluster matrix (W0):_ [[2.46 1.38], [0.34 1.02]]<br/>
-_Example array * cluster matrix (A1 * W0):_ [ 0.66 -0.22] * [[2.46 1.38], [0.34 1.02]] = [1.56, 0.68]<br/>
-_A1 * W0 with eps after sigmoid function:_ [0.5, 0.82, 0.66]<br/>
-_A1 * W0 after binarization:_ [0, 0, 0]<br/>
-
-_Cluster matrix (W0):_ [[2.46 1.38], [0.34 1.02]]<br/>
-_Example array * cluster matrix (A2 * W0):_ [-1.12 -0.63] * [[2.46 1.38], [0.34 1.02]] = [-3.00, -2.21]<br/>
-_A2 * W0 with eps after sigmoid function:_ [0.5, 0.04, 0.09]<br/>
-_A2 * W0 after binarization:_ [0, 1, 1]<br/>
-
-_**Cluster 1**_
-
-_Cluster matrix (W1):_ [[0.31 -1.22], [-0.22  1.33]]<br/>
-_Example array * cluster matrix (A3 * W1):_ [0.02 1.98] * [[0.31 -1.22], [-0.22  1.33]] = [-0.43, 2.62]<br/>
-_A3 * W1 with eps after sigmoid function:_ [0.39, 0.93, 0.5]<br/>
-_A3 * W1 after binarization:_ [1, 0, 0]  
-
-_Cluster matrix (W1):_ [[2.46 1.38], [0.34 1.02]]<br/>
-_Example array * cluster matrix (A4 * W1):_ [ 1.44  -0.28] * [[0.31 -1.22], [-0.22  1.33]] = [0.51, -2.15]<br/>
-_A4 * W1 with eps after sigmoid function:_ [0.62, 0.10, 0.5]<br/>
-_A4 * W1 after binarization:_ [0, 1, 0]<br/>
-
-**data:** [[0, 0, 0], [0, 0, 0], [0, 1, 1], [1, 0, 0], [0, 1, 0]]
-
-**labels:** [0 0 0 1 1]
-
-#### Install
-
-```markdown
-pip install git+https://github.com/aquinordg/rdga_4k.git
+```python
+X, y = catbird(n_feat=10, feat_sig=[3, 2], rate=[50, 50], lmbd=0.7, eps=0.1, random_state=42)
 ```
 
-#### Contact us
+---
 
-E-mail: aquinordga@gmail.com
+### `canard`
+
+Generates a labeled dataset with categorical features divided into multiple categories.
+
+#### Parameters
+
+- `n_feat` (int): Number of total features. Must be greater than 1.
+- `n_cat` (int): Number of categories for each feature. Must be greater than 1.
+- `rate` (list[int]): Number of examples per cluster.
+- `lmbd` (int): Intersection factor between features. Default is `10`.
+- `eps` (float): Noise rate for feature generation. Default is `0.3`.
+- `random_state` (int or RandomState, optional): Seed for reproducibility.
+
+#### Returns
+- `X` (np.ndarray): Matrix of categorical features.
+- `y` (np.ndarray): Array of cluster labels.
+
+#### Example
+
+```python
+X, y = canard(n_feat=10, n_cat=3, rate=[50, 50], lmbd=5, eps=0.2, random_state=42)
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! To contribute:
+
+1. Fork the repository.
+2. Create a new branch.
+3. Commit your changes.
+4. Push to the branch.
+5. Open a pull request.
+
+For questions or information, feel free to reach out at: [aquinordga@gmail.com](mailto:aquinordga@gmail.com).
+
+---
+
+## 👨‍💻 Author
+
+Developed by AQUINO, R. D. G. 
+[![Lattes](https://github.com/aquinordg/custom_tools/blob/main/icons/icons8-plataforma-lattes-32.png)](http://lattes.cnpq.br/2373005809061037)
+[![ORCID](https://github.com/aquinordg/custom_tools/blob/main/icons/icons8-orcid-32.png)](https://orcid.org/0000-0002-8486-8354)
+[![Google Scholar](https://github.com/aquinordg/custom_tools/blob/main/icons/icons8-google-scholar-32.png)](https://scholar.google.com/citations?user=r5WsvKgAAAAJ&hl)
+
+---
+
+## 💬 Feedback
+
+Feel free to open an issue or contact me for feedback or feature requests. Your input is highly appreciated!
